@@ -56,5 +56,9 @@ module.exports = function(base_uri) {
 		if (onerror) source.onerror = onerror;
 	}
 
+	module.sendGravity = function (gravity) {
+		return sendSensorData.call(this, {gravity: gravity});
+	};
+
 	return module;
 };

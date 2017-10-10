@@ -55,6 +55,12 @@ function onColorData(color) {
                              ' c ' + color.clear );
 }
 
+function onGravityData(gravity) {
+    console.log('Gravity sensor: x ' + gravity.x +
+                               ' y ' + gravity.y +
+                               ' z ' + gravity.z );
+}
+
 function setup(settings){
     this.temperature_interval_set(settings.temperature.interval, function(error) {
         if (error) {
@@ -81,6 +87,12 @@ function setup(settings){
             console.log('Gas sensor configure! ' + error);
         }
     });
+
+    this.motion_processing_freq_set(settings.gravity.frequency, function(error) {
+        if (error) {
+            console.log('Gravity Sensor configure! ' + error);
+        }
+    });
 }
 
 function onButtonChange(state) {
@@ -102,6 +114,9 @@ function onButtonChange(state) {
             this.gas_disable(function(error) {
                 console.log('Gas sensor stopped! ' + ((error) ? error : ''));
             });
+            this.gravity_disable(function(error) {
+                console.log('Gravity sensor stopped! ' + ((error) ? error : ''));
+            });
         }
         else {
             this.enabled = true;
@@ -119,6 +134,9 @@ function onButtonChange(state) {
             });
             this.gas_enable(function(error) {
                 console.log('Gas sensor started! ' + ((error) ? error : ''));
+            });
+            this.gravity_enable(function(error) {
+                console.log('Gravity sensor started! ' + ((error) ? error : ''));
             });
         }
     }
@@ -140,6 +158,7 @@ function onDiscover(thingy, enableEventSource = false) {
     thingy.on('gasNotif', client.sendGas.bind(thingy)/*onGasData*/);
     thingy.on('colorNotif', client.sendColor.bind(thingy)/*onColorData*/);
     thingy.on('buttonNotif', client.setButton.bind(thingy)/*onButtonChange*/);
+    thingy.on('gravityNotif', client.sendGravity.bind(thingy)/*onGravityData*/);
 
     client.getSettings.call(thingy).on('complete', setup.bind(thingy));
     if (enableEventSource) {
@@ -168,6 +187,9 @@ function onDiscover(thingy, enableEventSource = false) {
     });
     thingy.button_enable(function(error) {
         console.log('Button started! ' + ((error) ? error : ''));
+    });
+    thingy.gravity_enable(function(error) {
+        console.log('Gravity sensor started! ' + ((error) ? error : ''));
     });
   });
 }

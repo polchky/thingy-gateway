@@ -1,23 +1,23 @@
 {
   "name": "thingy-gateway",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Nordic Thingy:52 Node.js gateway",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DurandA/thingy-gateway.git"
+    "url": "git+https://github.com/polchky/thingy-gateway.git"
   },
   "keywords": [],
-  "author": "Arnaud Durand",
+  "author": "Pascal Gremaud",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DurandA/thingy-gateway/issues"
+    "url": "https://github.com/polchky/thingy-gateway/issues"
   },
-  "homepage": "https://github.com/DurandA/thingy-gateway#readme",
+  "homepage": "https://github.com/polchky/thingy-gateway#readme",
   "dependencies": {
     "eventsource": "^1.0.5",
     "restler": "^3.4.0",
-    "thingy52": "^1.0.1",
+    "thingy52": "git+https://github.com/polchky/Nordic-Thingy52-Nodejs.git",
     "yargs": "^8.0.2"
   }
 }
